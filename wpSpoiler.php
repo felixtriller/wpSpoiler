@@ -26,13 +26,30 @@
 	GNU General Public License for more details.
 */
 
-function wpspoiler($atts, $content = null) {
+
+function wpspoiler_init_admin() {
+	$plugin_dir = basename(dirname(__FILE__));
+	
+	load_plugin_textdomain( 'wpspoiler', null, $plugin_dir );
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'wpspoiler', $plugin_dir . '/wpspoiler.js', array('jquery') );
+	wp_enqueue_style( 'wpspoiler', $plugin_dir . '/wpspoiler.css' );
+}
+
+add_action( 'init', 'wpspoiler_init' );
+
+
+function wpspoiler( $atts, $content = null ) {
 	if ( !is_null($content) ) {
-		$atts = extract(shortcode_atts(array('default'=>'values'),$atts));
+		$atts = extract( shortcode_atts( array(
+			'show' => 'Show',
+			'hide' => 'Hide'
+			),$atts));
 	
 		// do shortcode actions here
 	}
 }
-add_shortcode('spoiler','wpspoiler');
+
+add_shortcode( 'spoiler','wpspoiler' );
 
 ?>
