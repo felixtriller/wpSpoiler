@@ -27,10 +27,10 @@
 */
 
 
-function wpspoiler_init_admin() {
+function wpspoiler_init() {
 	$plugin_dir = basename(dirname(__FILE__));
 	
-	load_plugin_textdomain( 'wpspoiler', null, $plugin_dir );
+	load_plugin_textdomain( 'wpspoiler', null, $plugin_dir . '/languages/' );
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'wpspoiler', $plugin_dir . '/wpspoiler.js', array('jquery') );
 	wp_enqueue_style( 'wpspoiler', $plugin_dir . '/wpspoiler.css' );
